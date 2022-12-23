@@ -1,6 +1,7 @@
 import axios from 'axios'
 import userService from './user'
 const baseUrl = '/api/login'
+const serverUrl = 'https://annunci-webserver.onrender.com'
 
 // Set header with token authorization
 let config = () => {
@@ -16,7 +17,7 @@ let config = () => {
  * Log in with the received credential
  */
 const login = async credentials => {
-  const response = await axios.post(baseUrl, credentials)
+  const response = await axios.post(serverUrl + baseUrl, credentials)
 
   userService.setUser(response)
   return response.data
@@ -38,7 +39,7 @@ const logout = () => {
  */
 const verifyLoggedInUser = async () => {
   try {
-    const res = await axios.get(baseUrl, config())
+    const res = await axios.get(serverUrl + baseUrl, config())
     return res.status
   } catch (e) {
     console.log(e)

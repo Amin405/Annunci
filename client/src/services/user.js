@@ -1,5 +1,6 @@
 import axios from 'axios'
 const baseUrl = '/api/login'
+const serverUrl = 'https://annunci-webserver.onrender.com'
 let token = null
 
 const STORAGE_KEY = 'loggedAnnunciUser'
@@ -33,7 +34,7 @@ const getUser = () => {
  */
 const getUserID = async () => {
   const user = getUser()
-  const updatedUrl = baseUrl + '/loggedUserId'
+  const updatedUrl = serverUrl + baseUrl + '/loggedUserId'
   const req = await axios.get(updatedUrl, config(user.token))
   return req.data
 }
@@ -54,7 +55,7 @@ const setUser = (response) => {
  * Check if the user's token is valid 
  */
 const checkUser = async () => {
-  const req = await axios.get(baseUrl)
+  const req = await axios.get(serverUrl + baseUrl)
   return req
 }
 
